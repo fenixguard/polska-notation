@@ -29,26 +29,22 @@ def input_data():
             print("Вы ввели недопустимое количество элементов")
             continue
         operation = expression[0]
-        assert operation in possible_operations, f"Операция '{operation}' над числами не поддерживается"
+        assert operation in possible_operations, f"Введена некорректная арифметическая операция! Доступные операции: {possible_operations}"
 
-        try:
-            var_1 = int(expression[1])
-        except ValueError:
-            print(f"{expression[1]} - не является числом!")
-            continue
-
-        try:
-            var_2 = int(expression[2])
-            global_flag = False
-        except ValueError:
-            print(f"{expression[2]} - не является числом!")
-            continue
+        assert expression[1].isdigit(), "Первое значение в формуле должно быть положительным числом!"
+        assert expression[2].isdigit(), "Второе значение в формуле должно быть положительным числом!"
+        
+        var_1 = int(expression[1])
+        var_2 = int(expression[2])
 
         return operation, var_1, var_2
 
 
 def main():
     print("Вычисление по польской нотации")
+    print("Для положительных чисел")
+    print(f"Доступные операции: {possible_operations}")
+    print("-" * 40)
     operation, var_1, var_2 = input_data()
     if operation == '+':
         print(f"{operation} {var_1} {var_2} = {addition(var_1, var_2)}")
